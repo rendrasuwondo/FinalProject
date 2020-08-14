@@ -4,12 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
-
-            
               <div class="card">
                 <div class="card-header"><div class="d-md-flex flex-md-row-reverse align-items-center justify-content-between">
-                    <a class="btn btn-sm btn-primary my-2 my-md-0" href="https://github.com/twbs/bootstrap/tree/v4-dev/site/docs/4.5/utilities/borders.md" title="View and edit this file on GitHub" target="_blank" rel="noopener">Bertanya?</a>
+                    <a class="btn btn-sm btn-primary my-2 my-md-0" href="{{ route('pertanyaan.create') }}">Buat Pertanyaan</a>
                     
                     <h1 class="bd-title" id="content">Pertanyaan</h1>
                   </div></div>
