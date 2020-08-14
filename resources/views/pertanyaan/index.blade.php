@@ -38,7 +38,7 @@
                 <tr>
                   <td> {{ $no++ }} </td>
                   <td> {{ $data->judul }} </td>
-                  <td> {{ substr($data->isi, 0,60) }} </td>
+                  <td> {!! substr($data->isi, 0,100) !!}...</td>
                   <td> 
                     <form action="{{ route('pertanyaan.destroy', $data->id) }}" method="POST">
                       <a class="btn btn-info btn-sm" href="{{ route('pertanyaan.show',$data->id) }}">Lihat</a>

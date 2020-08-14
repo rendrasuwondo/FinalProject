@@ -35,14 +35,14 @@
               </div>
               <div class="">
                 <p>
-                  {{ $pertanyaan->isi }}
+                  {!! $pertanyaan->isi !!}
                 </p>
               </div>
-     `        <hr>
+             <hr>
               <div>
                 <input type="text" class="form-control" id="isi" name="isi" placeholder="isi" value="">
-                                  <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
-                            </div>
+                <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
+              </div>
                             
             </div>
           </div>
