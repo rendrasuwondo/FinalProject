@@ -70,7 +70,7 @@ class PertanyaanController extends Controller
      */
     public function edit(Pertanyaan $pertanyaan)
     {
-        //
+        return view('pertanyaan.edit', compact('pertanyaan'));
     }
 
     /**
@@ -82,7 +82,17 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, Pertanyaan $pertanyaan)
     {
-        //
+        $request->validate([
+            'judul' => 'required',
+            'isi' => 'required',
+        ]);
+
+        $pertanyaan->update([
+            'judul' => $request->judul,
+            'isi' => $request->isi,
+        ]);
+
+        return redirect()->route('pertanyaan.show', compact('pertanyaan'));
     }
 
     /**
@@ -93,6 +103,8 @@ class PertanyaanController extends Controller
      */
     public function destroy(Pertanyaan $pertanyaan)
     {
-        //
+        $pertanyaan->delete();
+
+        return redirect()->route('pertanyaan.index');
     }
 }
