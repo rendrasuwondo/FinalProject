@@ -25,6 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route Pertanyaan 
 Route::resource('pertanyaan', 'PertanyaanController');
 
+// Route Jawaban 
+Route::resource('jawaban', 'JawabanController');
+
 Route::middleware('auth')->group(function () {
     // Route::resource('jawaban', 'JawabanController');
     // Route::resource('jawaban-komen', 'JawabanKomenController');

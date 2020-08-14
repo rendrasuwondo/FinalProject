@@ -39,11 +39,20 @@
                 </p>
               </div>
      `        <hr>
-              <div>
-                <input type="text" class="form-control" id="isi" name="isi" placeholder="isi" value="">
-                                  <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
-                            </div>
-                            
+     <form action="{{ route('jawaban.store') }}" method="POST">
+      @csrf
+     <div class="form-group">
+     <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
+      <label for="isi"><h3>Jawaban Anda</h3></label>
+      <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
+      
+      <input type="submit" value="Post" class="btn btn-success mt-2">
+     </form>
+     
+    </div>
+
+             
+
             </div>
           </div>
           
