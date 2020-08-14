@@ -25,11 +25,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route Pertanyaan 
 Route::resource('pertanyaan', 'PertanyaanController');
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     // Route::resource('jawaban', 'JawabanController');
     // Route::resource('jawaban-komen', 'JawabanKomenController');
     // Route::resource('pertanyaan-komen', 'PertanyaanKomenControlller');
     // Route::resource('jawaban-like', 'JawabanLikeControlller');
     // Route::resource('pertanyaan-like', 'PertanyaanLikeControlller');
     // Route::resource('user', 'UserController');
+});
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
 });

@@ -46,7 +46,7 @@ class PertanyaanController extends Controller
      */
     public function show(Pertanyaan $pertanyaan)
     {
-        //
+        return view('pertanyaan.show');
     }
 
     /**
