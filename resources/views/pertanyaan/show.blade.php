@@ -38,7 +38,6 @@
                   {!! $pertanyaan->isi !!}
                 </p>
               </div>
-<<<<<<< HEAD
      `        <hr>
      <form action="{{ route('jawaban.store') }}" method="POST">
       @csrf
@@ -54,14 +53,6 @@
 
              
 
-=======
-             <hr>
-              <div>
-                <input type="text" class="form-control" id="isi" name="isi" placeholder="isi" value="">
-                <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
-              </div>
-                            
->>>>>>> 0278f14dc904d847df0da9298ca0ee296396ab66
             </div>
           </div>
           
