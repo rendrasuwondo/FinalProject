@@ -19,6 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @push('script-head')
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    @endpush
+
     @stack('script-head')
 </head>
 <body>
@@ -81,6 +85,9 @@
     </div>
 
     @stack('script')
+    @push('script')
+  
 </body>
+
 </html>
 
