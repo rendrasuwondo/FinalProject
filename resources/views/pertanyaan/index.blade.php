@@ -19,83 +19,37 @@
                   {{ session('status') }}
               </div>
             @endif
-
               
-            <table class="table">
+            <table class="table table-hover">
               <thead>
                 <tr>
-                  <th scope="col">Vote</th>
-                  <th scope="col">Jawaban</th>
-                  <th scope="col">Pertanyaan</th>
+                  <th>No</th>
+                  <th>Judul</th>
+                  <th>Pertanyaan</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
+                @php
+                    $no = 1;
+                @endphp
+                @foreach ($pertanyaan as $data)
+                    
                 <tr>
-                  <th scope="row">1</th>
-                  <th scope="row">2</th>
-                  <td>
-                    <h3>
-                      <a href="/questions/63397623/how-to-make-the-control-on-same-page-till-text-boxes-got-correct-no-of-characte" class="question-hyperlink">
-                        How to make the control on same page till text boxes got correct no. of characters?
-                      </a>
-                    </h3>
-                    <div class="d-flex">
-                      <div>
-                        <a href="/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">
-                          javascript
-                        </a> 
-                        <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">
-                          php
-                        </a>
-                        <a href="/questions/tagged/laravel" class="post-tag" title="show questions tagged &#39;laravel&#39;" rel="tag">
-                          laravel
-                        </a> 
-                      </div>
-                      <div class="ml-auto">
-                          <a href="/questions/63397623/how-to-make-the-control-on-same-page-till-text-boxes-got-correct-no-of-characte" class="started-link">
-                            asked <span title="2020-08-13 14:47:05Z" class="relativetime">52 secs ago</span>
-                          </a>
-                          <a href="/users/14020788/sasikala">
-                            Sasikala
-                          </a> 
-                          <span class="reputation-score" title="reputation score " dir="ltr">1</span>
-                      </div>
-                    </div>
+                  <td> {{ $no++ }} </td>
+                  <td> {{ $data->judul }} </td>
+                  <td> {{ substr($data->isi, 0,60) }} </td>
+                  <td> 
+                    <form action="{{ route('pertanyaan.destroy', $data->id) }}" method="POST">
+                      <a class="btn btn-info btn-sm" href="{{ route('pertanyaan.show',$data->id) }}">Lihat</a>
+                      <a class="btn btn-primary btn-sm" href="{{ route('pertanyaan.edit',$data->id) }}">Perbarui</a>
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                    </form>
                   </td>
                 </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <th scope="row">2</th>
-                  <td>
-                    <h3>
-                      <a href="/questions/63397623/how-to-make-the-control-on-same-page-till-text-boxes-got-correct-no-of-characte" class="question-hyperlink">
-                        How to make the control on same page till text boxes got correct no. of characters?
-                      </a>
-                    </h3>
-                    <div class="d-flex">
-                      <div>
-                        <a href="/questions/tagged/javascript" class="post-tag" title="show questions tagged &#39;javascript&#39;" rel="tag">
-                          javascript
-                        </a>
-                        <a href="/questions/tagged/php" class="post-tag" title="show questions tagged &#39;php&#39;" rel="tag">
-                          php
-                        </a>
-                        <a href="/questions/tagged/laravel" class="post-tag" title="show questions tagged &#39;laravel&#39;" rel="tag">
-                          laravel
-                        </a> 
-                      </div>
-                      <div class="ml-auto">
-                        <a href="/questions/63397623/how-to-make-the-control-on-same-page-till-text-boxes-got-correct-no-of-characte" class="started-link">
-                          asked <span title="2020-08-13 14:47:05Z" class="relativetime">52 secs ago</span>
-                        </a>
-                        <a href="/users/14020788/sasikala">
-                          Sasikala
-                        </a>
-                        <span class="reputation-score" title="reputation score " dir="ltr">1</span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
