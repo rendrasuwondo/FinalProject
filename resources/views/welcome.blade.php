@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                <a style="text-decoration: none" href="{{url('/home')}}">Kelompok 11</a> 
+                <a style="text-decoration: none" href="{{route('pertanyaan.index')}}">Kelompok 11</a> 
                 </div>
 
                 <div class="links">
