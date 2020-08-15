@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@push('script-head')
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+@endpush
+
 @section('content')
 
   <section>
