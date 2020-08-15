@@ -330,7 +330,15 @@
 
         //JAWABAN TEPAT========================= 
         function jawabanTepat(id) {
-            window.location="/jawabanTepat/" + document.getElementById("jawabanTepat"+id).value+ "/" + id;
+
+          if ({{$pertanyaan->user_id}}=={{Auth::id()}}) {
+
+            window.location="/jawabanTepat/" + document.getElementById("jawabanTepat"+id).value+ "/" + id + "/{{$pertanyaan->id}}";
+
+          } else {
+            alert('Anda bukan pemilik pertanyaan!');
+          }
+
 
 
 

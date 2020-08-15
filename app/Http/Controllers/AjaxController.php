@@ -158,5 +158,14 @@ class AjaxController extends Controller
 
     public function jawabanTepat(Request $request)
     {
+
+        // dd($request->segment(2));
+
+        $update = Jawaban::where('id', $request->segment(3))->update(
+            [
+                'jawaban_tepat' => $request->segment(2)
+            ]
+        );
+        return redirect()->route('pertanyaan.show', $request->segment(4));
     }
 }
