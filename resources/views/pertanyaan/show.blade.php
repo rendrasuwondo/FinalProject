@@ -12,13 +12,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <form action="{{ route('pertanyaan.destroy',$pertanyaan->id) }}" method="post">
+          @if (Auth::id() == $pertanyaan->user_id)
+            <form action="{{ route('pertanyaan.destroy',$pertanyaan->id) }}" method="post">
+              <a href="{{ route('pertanyaan.index') }}" class="btn btn-info">Kembali</a>
+              <a href="{{ route('pertanyaan.edit', $pertanyaan->id) }}" class="btn btn-primary">Edit</a>
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-danger">Hapus</button>
+            </form>
+            @else
             <a href="{{ route('pertanyaan.index') }}" class="btn btn-info">Kembali</a>
-            <a href="{{ route('pertanyaan.edit', $pertanyaan->id) }}" class="btn btn-primary">Edit</a>
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger">Hapus</button>
-          </form>
+          @endif
           <div>&nbsp;</div>
         </div>
         <div class="col-md-12">

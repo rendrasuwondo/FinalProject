@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header">
             <div class="d-md-flex flex-md-row-reverse align-items-center justify-content-between">
@@ -21,25 +21,20 @@
             @endif
               
             <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Judul</th>
-                  <th>Pertanyaan</th>
-                  <th></th>
-                </tr>
-              </thead>
               <tbody>
                 @php
                     $no = 1;
                 @endphp
                 @foreach ($pertanyaan as $data)
-                    
+                  
                 <tr>
                   <td> {{ $no++ }} </td>
                   <td> {{ $data->judul }} </td>
                   <td> {!! substr($data->isi, 0,100) !!}...</td>
                   <td> 
+
+                    @if ($data->user_id == Auth::id())
+                        
                     <form action="{{ route('pertanyaan.destroy', $data->id) }}" method="POST">
                       <a class="btn btn-info btn-sm" href="{{ route('pertanyaan.show',$data->id) }}">Lihat</a>
                       <a class="btn btn-primary btn-sm" href="{{ route('pertanyaan.edit',$data->id) }}">Perbarui</a>
@@ -47,6 +42,13 @@
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                     </form>
+
+                    @else
+
+                    <a class="btn btn-info btn-sm" href="{{ route('pertanyaan.show',$data->id) }}">Lihat</a>
+
+                    @endif
+
                   </td>
                 </tr>
                 @endforeach
