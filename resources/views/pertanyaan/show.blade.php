@@ -41,7 +41,53 @@
                 Dibuat Pada : <a href="">{{ $pertanyaan->created_at }}</a>
                   </div>               
                 </div>           
-              </div>              
+              </div>   
+              <br>
+              {{-- Show Pertanyaan Comment --}}
+              <p>
+                <a class=" fa fa-comments" data-toggle="collapse" href="#pertanyaanKomenShow" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Lihat Komentar
+                </a>
+              </p>
+              <div class="collapse" id="pertanyaanKomenShow">
+                <div class="card card-body">
+                  
+                  {{-- Foreach Komentar --}}
+                  @foreach ($pertanyaanKomen as $data)
+                      <div class="row">
+                        <div class="col-md-12">
+                          <a href="" class="text-info">{{ $data->user->name }}</a>
+                          <p> {!! $data->isi !!} </p>
+                        </div>
+                      </div>
+                      <hr>
+                  @endforeach
+
+                </div>
+              </div>
+
+              {{-- Show Form Pertanyaan Komen --}}
+              <p>
+                <a class="text-danger" data-toggle="collapse" href="#pertanyaanKomenForm" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Buat Pertanyaan <i class="fa fa-question-circle"></i>
+                </a>
+              </p>
+              <div class="collapse" id="pertanyaanKomenForm">
+                <div class="card card-body">
+                  <form action="{{ route('pertanyaan-komen.store') }}" method="POST">
+                      @csrf
+                      <div class="form-group">
+                        <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
+                        <label for="isi"><h3>Pertanyaan</h3></label>
+                        <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
+                        
+                        <input type="submit" value="Post" class="btn btn-success mt-2">
+                      </div>
+
+                  </form>
+                </div>
+              </div>
+
               <hr>
 
               <h3>Jawaban</h3>
