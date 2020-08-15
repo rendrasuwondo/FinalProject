@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class JawabanController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('auth')->except(['index', 'show']);
+        // $this->middleware('auth')->only(['create']);
+    }
+
     /**
      * Display a listing of the resource.
      *

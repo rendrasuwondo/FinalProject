@@ -17,7 +17,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/app.css') }}" rel="stylesheet">
+
+    <link href="{{asset('fontawesome/css/fontawesome.css')}}" rel="stylesheet">
+    <link href="{{asset('fontawesome/css/brands.css')}}" rel="stylesheet">
+    <link href="{{asset('fontawesome/css/solid.css')}}" rel="stylesheet">
 
     @stack('script-head')
 </head>

@@ -48,9 +48,19 @@
 
               
               @foreach ($jawaban as $item)
+              
               <div class="card" >
                 <div class="card-header">
-                 <h4>{!! $item->isi !!}</h4> 
+                  <div class="row">            
+                    <div class="col-md-1" style="font-size: 20px; color:#606060; text-align: center;">
+                      
+                        <i class="fas fa-chevron-up"></i>
+                        <span class="col-md-12">0</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="col"><h4>{!! $item->isi !!}</h4> 
+                    </div>
+                  </div> 
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
