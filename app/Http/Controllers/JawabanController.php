@@ -52,6 +52,7 @@ class JawabanController extends Controller
 
         $jawaban = $request->all();
         $jawaban['user_id'] = Auth::id();
+        $jawaban['jawaban_tepat'] = 0;
 
 
         Jawaban::create($jawaban);

@@ -129,10 +129,28 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
-
-                    Oleh : {{$item->name}}
-                    Tanggal : {{$item->created_at}}
+                    <div class="row">
+                    <div class="col-lg-6"> Oleh : {{$item->name}}
+                      Tanggal : {{$item->created_at}}</div>
+                    <div class="col-lg-6"> <span >Jawaban Tepat?</span>
+                      <select onchange="jawabanTepat({{$item->id}})" class="form-control" id="jawabanTepat{{$item->id}}">
+                        @if ($item->jawaban_tepat==1)
+                        <option value=1 selected>Ya</option>
+                        <option value=0 >Tidak</option>    
+                        @else
+                        <option value=1>Ya</option>
+                        <option value=0 selected>Tidak</option>
+                        @endif
+                        
+                        
+                      </select>
+                    </div>
+                    </div>  
+                   
+                   
+                    
                   </li>
+               
                   <li class="list-group-item">
                     <div class="row">
                       <p>
@@ -308,7 +326,19 @@
            return false;
 
          }
-//VOTE========================= END
+        //VOTE========================= END
+
+        //JAWABAN TEPAT========================= 
+        function jawabanTepat(id) {
+            window.location="/jawabanTepat/" + document.getElementById("jawabanTepat"+id).value+ "/" + id;
+
+
+
+          
+        }
+        //JAWABAN TEPAT========================= END
    
+
+
   </script>    
 @endpush

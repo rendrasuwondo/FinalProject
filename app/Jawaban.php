@@ -9,7 +9,7 @@ class Jawaban extends Model
     protected $table = 'jawaban';
 
     protected $fillable = [
-        'user_id', 'pertanyaan_id', 'isi'
+        'user_id', 'pertanyaan_id', 'isi', 'jawaban_tepat'
     ];
 
     public function user()

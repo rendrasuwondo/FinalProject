@@ -46,5 +46,6 @@ Route::get('/pertanyaanUp/{id}', 'AjaxController@pertanyaanUp');
 Route::get('/pertanyaanDown/{id}', 'AjaxController@pertanyaanDown');
 Route::get('/jawabanUp/{id}/{id2}', 'AjaxController@jawabanUp');
 Route::get('/jawabanDown/{id}/{id2}', 'AjaxController@jawabanDown');
+Route::get('/jawabanTepat/{id}/{id2}', 'AjaxController@jawabanTepat');
 //VOTE==================== END
 Route::get('/about', 'HomeController@about');

@@ -155,4 +155,8 @@ class AjaxController extends Controller
         // // return response()->json(array('msg' => $msg), 200);
         return redirect()->route('pertanyaan.show', $request->segment(3));
     }
+
+    public function jawabanTepat(Request $request)
+    {
+    }
 }
