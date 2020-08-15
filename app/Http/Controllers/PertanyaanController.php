@@ -6,6 +6,7 @@ use App\Pertanyaan;
 use App\Jawaban;
 use App\PertanyaanKomen;
 use App\JawabanKomen;
+use App\V_reputasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -27,8 +28,13 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
+        $reputasi = DB::table('v_reputasi')
+            ->where('user_id', Auth::id())
+            ->sum('point');
+
+
         $pertanyaan = Pertanyaan::latest()->paginate(10);
-        return view('pertanyaan.index', compact('pertanyaan'));
+        return view('pertanyaan.index', compact('pertanyaan', 'reputasi'));
     }
 
     /**
@@ -90,6 +96,11 @@ class PertanyaanController extends Controller
             ->get();
 
         // dd($jawaban_vote);
+        $reputasi = DB::table('v_reputasi')
+            ->where('user_id', Auth::id())
+            ->sum('point');
+
+        // dd($reputasi);
 
         $vote = DB::table('pertanyaan_like')
             ->where('pertanyaan_id', $pertanyaan->id)
@@ -97,7 +108,7 @@ class PertanyaanController extends Controller
 
         // dd($vote);
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
-        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote'));
+        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote', 'reputasi'));
     }
 
     /**

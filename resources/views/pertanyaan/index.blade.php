@@ -1,9 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-12">
+        <nav class="navbar navbar-light bg-light" >
+          <a class="navbar-brand" href="#">
+            {{Auth::user()->email }}
+            Reputasi : {{$reputasi}}
+          </a>
+        </nav>
         <div class="card">
           <div class="card-header">
             <div class="d-md-flex flex-md-row-reverse align-items-center justify-content-between">

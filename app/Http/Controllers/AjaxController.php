@@ -9,6 +9,7 @@ use App\Pertanyaan;
 use Illuminate\Support\Facades\Auth;
 use App\Jawaban;
 use App\Jawaban_like;
+use App\V_reputasi;
 
 
 class AjaxController extends Controller
@@ -69,13 +70,17 @@ class AjaxController extends Controller
     public function pertanyaanDown($id)
     {
 
-        //INSERT VOTE
-        $pertanyaan['user_id'] = Auth::id();
-        $pertanyaan['pertanyaan_id'] = $id;
-        $pertanyaan['point'] = -1;
+        $reputasi = V_reputasi::where('user_id', Auth::id())->first();
 
-        Pertanyaan_like::create($pertanyaan);
-        //INSERT VOTE END
+        if ($reputasi['point'] >= 15) {
+            //INSERT VOTE
+            $pertanyaan['user_id'] = Auth::id();
+            $pertanyaan['pertanyaan_id'] = $id;
+            $pertanyaan['point'] = -1;
+
+            Pertanyaan_like::create($pertanyaan);
+            //INSERT VOTE END
+        }
 
         //SUM VOTE
         $msg = DB::table('pertanyaan_like')
@@ -126,15 +131,19 @@ class AjaxController extends Controller
     public function jawabanDown(Request $request)
     {
 
-        // dd($request->segment(3));
+        $reputasi = V_reputasi::where('user_id', Auth::id())->first();
 
-        //INSERT VOTE
-        $jawaban['user_id'] = Auth::id();
-        $jawaban['jawaban_id'] = $request->segment(2);
-        $jawaban['point'] = -1;
+        if ($reputasi['point'] >= 15) {
+            // dd($request->segment(3));
 
-        Jawaban_like::create($jawaban);
-        // //INSERT VOTE END
+            //INSERT VOTE
+            $jawaban['user_id'] = Auth::id();
+            $jawaban['jawaban_id'] = $request->segment(2);
+            $jawaban['point'] = -1;
+
+            Jawaban_like::create($jawaban);
+            // //INSERT VOTE END
+        }
 
         //SUM VOTE
         $msg = DB::table('jawaban_like')

@@ -7,7 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>{{Request::segment(1)}}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -78,8 +79,7 @@
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
+        <main class="py-1">
             @yield('content')
         </main>
     </div>

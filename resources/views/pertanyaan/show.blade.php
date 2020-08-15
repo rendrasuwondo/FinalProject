@@ -11,10 +11,16 @@
 @section('content')
     
   <section>
-
+    
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <nav class="navbar navbar-light bg-light" >
+            <a class="navbar-brand" href="#">
+              {{Auth::user()->email }}
+              Reputasi : {{$reputasi}}
+            </a>
+          </nav>
           @if (Auth::id() == $pertanyaan->user_id)
             <form action="{{ route('pertanyaan.destroy',$pertanyaan->id) }}" method="post">
               <a href="{{ route('pertanyaan.index') }}" class="btn btn-info">Kembali</a>
@@ -86,7 +92,7 @@
               {{-- Show Form Pertanyaan Komen --}}
               <p>
                 <a class="text-danger" data-toggle="collapse" href="#pertanyaanKomenForm" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Buat Pertanyaan <i class="fa fa-question-circle"></i>
+                  Buat Komentar <i class="fa fa-question-circle"></i>
                 </a>
               </p>
               <div class="collapse" id="pertanyaanKomenForm">
@@ -94,7 +100,7 @@
                   @csrf
                   <div class="form-group">
                     <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
-                    <label for="isi"><h3>Pertanyaan</h3></label>
+                    <label for="isi"><h3>Komentar</h3></label>
                     <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
                     
                     <input type="submit" value="Post" class="btn btn-success mt-2">
