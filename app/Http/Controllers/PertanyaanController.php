@@ -3,11 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Pertanyaan;
+use App\Jawaban;
+use App\PertanyaanKomen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class PertanyaanController extends Controller
 {
+
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        $this->middleware('auth')->except(['index', 'show']);
+        // $this->middleware('auth')->only(['create']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,7 +70,25 @@ class PertanyaanController extends Controller
      */
     public function show(Pertanyaan $pertanyaan)
     {
-        return view('pertanyaan.show', compact('pertanyaan'));
+        // $jawaban = Jawaban::latest()->paginate(10);
+        $user = Pertanyaan::find($pertanyaan->id);
+        $jawaban = jawaban::where('pertanyaan_id', $pertanyaan->id)->get();
+
+        $vote = DB::table('pertanyaan_like')
+            ->where('pertanyaan_id', $pertanyaan->id)
+            ->sum('point');
+
+        // dd($vote);
+<<<<<<< HEAD
+
+        $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
+
+
+        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'vote', 'pertanyaanKomen'));
+=======
+        $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
+        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote'));
+>>>>>>> 20f4c6a1209ae878f9483fc7d82f036fa53b9550
     }
 
     /**

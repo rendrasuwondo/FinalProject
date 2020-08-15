@@ -25,13 +25,27 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route Pertanyaan
 Route::resource('pertanyaan', 'PertanyaanController');
 
-Route::middleware('auth')->group(function(){
+// Route Jawaban
+Route::resource('jawaban', 'JawabanController');
+
+
+Route::middleware('auth')->group(function () {
+    // Route Pertanyaan Komen
+    Route::resource('pertanyaan-komen', 'PertanyaanKomenController');
     // Route::resource('jawaban', 'JawabanController');
     // Route::resource('jawaban-komen', 'JawabanKomenController');
-    // Route::resource('pertanyaan-komen', 'PertanyaanKomenControlller');
     // Route::resource('jawaban-like', 'JawabanLikeControlller');
     // Route::resource('pertanyaan-like', 'PertanyaanLikeControlller');
     // Route::resource('user', 'UserController');
 });
 
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
+
+//VOTE====================
+Route::get('/getmsg/{id}', 'AjaxController@index');
+Route::get('/pertanyaanUp/{id}', 'AjaxController@pertanyaanUp');
+Route::get('/pertanyaanDown/{id}', 'AjaxController@pertanyaanDown');
+//VOTE==================== END
 Route::get('/about', 'HomeController@about');
