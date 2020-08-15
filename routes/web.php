@@ -28,10 +28,12 @@ Route::resource('pertanyaan', 'PertanyaanController');
 // Route Jawaban 
 Route::resource('jawaban', 'JawabanController');
 
+
 Route::middleware('auth')->group(function () {
+    // Route Pertanyaan Komen 
+    Route::resource('pertanyaan-komen', 'PertanyaanKomenController');
     // Route::resource('jawaban', 'JawabanController');
     // Route::resource('jawaban-komen', 'JawabanKomenController');
-    // Route::resource('pertanyaan-komen', 'PertanyaanKomenControlller');
     // Route::resource('jawaban-like', 'JawabanLikeControlller');
     // Route::resource('pertanyaan-like', 'PertanyaanLikeControlller');
     // Route::resource('user', 'UserController');
