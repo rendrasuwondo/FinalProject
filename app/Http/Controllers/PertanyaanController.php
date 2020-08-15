@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pertanyaan;
 use App\Jawaban;
 use App\PertanyaanKomen;
+use App\JawabanKomen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -79,16 +80,9 @@ class PertanyaanController extends Controller
             ->sum('point');
 
         // dd($vote);
-<<<<<<< HEAD
-
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
 
-
-        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'vote', 'pertanyaanKomen'));
-=======
-        $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
         return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote'));
->>>>>>> 20f4c6a1209ae878f9483fc7d82f036fa53b9550
     }
 
     /**
