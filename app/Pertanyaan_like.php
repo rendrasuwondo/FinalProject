@@ -9,6 +9,6 @@ class Pertanyaan_like extends Model
     protected $table = 'pertanyaan_like';
 
     protected $fillable = [
-        'user_id', 'pertanyaan_id', 'judul', 'isi'
+        'user_id', 'pertanyaan_id', 'point'
     ];
 }

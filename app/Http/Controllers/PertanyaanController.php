@@ -80,9 +80,10 @@ class PertanyaanController extends Controller
 
         // dd($vote);
 
-        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'vote'));
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
-        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen'));
+
+
+        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'vote', 'pertanyaanKomen'));
     }
 
     /**

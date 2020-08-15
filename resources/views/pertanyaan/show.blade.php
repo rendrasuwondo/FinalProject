@@ -25,7 +25,17 @@
           
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"> {{ $pertanyaan->judul }} </h3>
+              <div class="row">            
+                <div class="col-md-1" style="font-size: 20px; color:#606060; text-align: center;">
+                   <a onclick="return getUpPertanyaan()" href=""><i class="fas fa-chevron-up"></i></a>
+                    
+                <span class="col-md-12" id="pertanyaanvote">{{$vote}}</span>
+                <a onclick="return getDownPertanyaan()" href=""><i class="fas fa-chevron-down"></i></a>
+                </div>
+                <div class="col"> <h3 class="card-title"> {{ $pertanyaan->judul }} </h3>
+                </div>
+              </div> 
+             
             </div>
             <div class="card-body">
               <div class="container">
@@ -52,8 +62,8 @@
               <div class="collapse" id="pertanyaanKomenShow">
                 <div class="card card-body">
                   
-                  {{-- Foreach Komentar --}}
-                  @foreach ($pertanyaanKomen as $data)
+                  Foreach Komentar --}}
+                   @foreach ($pertanyaanKomen as $data)
                       <div class="row">
                         <div class="col-md-12">
                           <a href="" class="text-info">{{ $data->user->name }}</a>
@@ -136,9 +146,7 @@
             </div>
           </div>
           
-          <div id = 'msg'>This message will be replaced using Ajax. 
-            Click the button to replace the message.</div>
-         <button onclick="getMessage()">fgdsg</button>
+        
 
         </div>
       </div>
@@ -153,6 +161,7 @@
 @push('script')
 
 <script>
+    //WYSIWYG=========================
     var editor_config = {
       path_absolute : "/",
       selector: "textarea.my-editor",
@@ -187,15 +196,16 @@
     };
   
     tinymce.init(editor_config);
+    //WYSIWYG========================= END
 
-
-    function getUp() {
+    //VOTE=========================
+    function getUpPertanyaan() {
             $.ajax({
                type:'GET',
-               url:'/getmsg/{{$pertanyaan->id}}',
+               url:'/pertanyaanUp/{{$pertanyaan->id}}',
               //  data:'_token = <?php echo csrf_token() ?>',
                success:function(data) {
-                  $("#msg").html(data.msg);
+                  $("#pertanyaanvote").html(data.msg);
                }
             });
            
@@ -203,6 +213,20 @@
 
          }
 
+         function getDownPertanyaan() {
+            $.ajax({
+               type:'GET',
+               url:'/pertanyaanDown/{{$pertanyaan->id}}',
+              //  data:'_token = <?php echo csrf_token() ?>',
+               success:function(data) {
+                  $("#pertanyaanvote").html(data.msg);
+               }
+            });
+           
+           return false;
+
+         }
+//VOTE========================= END
    
   </script>    
 @endpush

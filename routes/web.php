@@ -43,4 +43,8 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
+//VOTE====================
 Route::get('/getmsg/{id}', 'AjaxController@index');
+Route::get('/pertanyaanUp/{id}', 'AjaxController@pertanyaanUp');
+Route::get('/pertanyaanDown/{id}', 'AjaxController@pertanyaanDown');
+//VOTE==================== END
