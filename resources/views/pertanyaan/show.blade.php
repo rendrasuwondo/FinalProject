@@ -1,3 +1,6 @@
+@php
+    use App\JawabanKomen;
+@endphp
 @extends('layouts.app')
 
 @push('script-head')
@@ -66,7 +69,7 @@
               <div class="collapse" id="pertanyaanKomenShow">
                 <div class="card card-body">
                   
-                  Foreach Komentar --}}
+                  {{-- Foreach Komentar  --}}
                    @foreach ($pertanyaanKomen as $data)
                       <div class="row">
                         <div class="col-md-12">
@@ -87,19 +90,16 @@
                 </a>
               </p>
               <div class="collapse" id="pertanyaanKomenForm">
-                <div class="card card-body">
-                  <form action="{{ route('pertanyaan-komen.store') }}" method="POST">
-                      @csrf
-                      <div class="form-group">
-                        <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
-                        <label for="isi"><h3>Pertanyaan</h3></label>
-                        <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
-                        
-                        <input type="submit" value="Post" class="btn btn-success mt-2">
-                      </div>
-
-                  </form>
-                </div>
+                <form action="{{ route('pertanyaan-komen.store') }}" method="POST">
+                  @csrf
+                  <div class="form-group">
+                    <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
+                    <label for="isi"><h3>Pertanyaan</h3></label>
+                    <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
+                    
+                    <input type="submit" value="Post" class="btn btn-success mt-2">
+                  </div>
+                </form>
               </div>
 
               <hr>
@@ -125,7 +125,58 @@
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
                     Oleh : {{$item->user->name}}
-                    Tanggal : {{$item->created_at}}  </li>
+                    Tanggal : {{$item->created_at}}
+                  </li>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <p>
+                        <a class=" fa fa-comments" data-toggle="collapse" href="#jawabanKomenShow" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Lihat Komentar
+                        </a>
+                      </p>
+                      <div style="margin-left: 20px"></div>
+                      <p>
+                        <a class="text-danger" data-toggle="collapse" href="#jawabanKomenForm" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Buat Pertanyaan <span class="fa fa-question-circle"></span>
+                        </a>
+                      </p>
+                    </div>
+                    <div class="collapse" id="jawabanKomenShow">
+                      <div class="card card-body">
+                        
+                        {{-- Foreach Komentar Pertanyaan --}}
+                        @php
+                            $lorem = JawabanKomen::where('jawaban_id',$item->id)->get();
+                        @endphp
+                         @foreach ($lorem as $data)
+                            <div class="row">
+                              <div class="col-md-12">
+                                <a href="" class="text-info">{{ $data->user->name }}</a>
+                                <p> {!! $data->isi !!} </p>
+                              </div>
+                            </div>
+                            <hr>
+                        @endforeach
+      
+                      </div>
+                    </div>
+                    <div>&nbsp;</div>
+                    {{-- Form Komentar Jawaban --}}
+                    <div class="collapse" id="jawabanKomenForm">
+                      <form action="{{ route('jawaban-komen.store') }}" method="POST">
+                          @csrf
+                          <div class="form-group">
+                            <input type="hidden" name="jawaban_id" value="{{$item->id}}">
+                            <input type="hidden" name="pertanyaan_id" value="{{$item->pertanyaan_id}}">
+                            <label for="isi"><h3>Pertanyaan</h3></label>
+                            <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
+                            
+                            <input type="submit" value="Post" class="btn btn-success mt-2">
+                          </div>
+    
+                      </form>
+                    </div>
+                  </li>  
                 </ul>
               </div>
               
@@ -142,21 +193,13 @@
                 
                 <input type="submit" value="Post" class="btn btn-success mt-2">
               </form>
-     
-            </div>
-
-             
-
             </div>
           </div>
-          
-        
-
         </div>
       </div>
     </div>
+  </div>
 
-    
   </section>
 
 @endsection
