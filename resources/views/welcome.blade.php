@@ -48,6 +48,10 @@
                 font-size: 84px;
             }
 
+            .text {
+              font-size: 18px;
+            }
+
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -76,14 +80,17 @@
                             <a href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
+                    <a href="/about">Tentang Kami</a>
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                <a style="text-decoration: none" href="{{route('pertanyaan.index')}}">Kelompok 11</a> 
+                <a style="text-decoration: none" href="{{route('pertanyaan.index')}}">Kelompok 11</a>
                 </div>
 
+                <p class="text">Platform diskusi dan tanya jawab seputar pemograman</p>
+                <!--
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
@@ -94,6 +101,8 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+              -->
+
             </div>
         </div>
     </body>

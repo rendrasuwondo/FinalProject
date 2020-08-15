@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route Pertanyaan 
+// Route Pertanyaan
 Route::resource('pertanyaan', 'PertanyaanController');
 
 Route::middleware('auth')->group(function(){
@@ -33,3 +33,5 @@ Route::middleware('auth')->group(function(){
     // Route::resource('pertanyaan-like', 'PertanyaanLikeControlller');
     // Route::resource('user', 'UserController');
 });
+
+Route::get('/about', 'HomeController@about');
