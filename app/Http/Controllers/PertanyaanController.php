@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pertanyaan;
 use App\Jawaban;
 use App\PertanyaanKomen;
+use App\JawabanKomen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -96,6 +97,10 @@ class PertanyaanController extends Controller
 
         // dd($vote);
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 166724e7338799aafd8f1dddcdffa5f66d0cee41
         return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote'));
     }
 

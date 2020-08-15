@@ -22,21 +22,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Route Pertanyaan 
+// Route Pertanyaan
 Route::resource('pertanyaan', 'PertanyaanController');
 
-// Route Jawaban 
+// Route Jawaban
 Route::resource('jawaban', 'JawabanController');
 
 
 Route::middleware('auth')->group(function () {
-    // Route Pertanyaan Komen 
+    // Route Pertanyaan Komen
     Route::resource('pertanyaan-komen', 'PertanyaanKomenController');
-    // Route::resource('jawaban', 'JawabanController');
-    // Route::resource('jawaban-komen', 'JawabanKomenController');
-    // Route::resource('jawaban-like', 'JawabanLikeControlller');
-    // Route::resource('pertanyaan-like', 'PertanyaanLikeControlller');
-    // Route::resource('user', 'UserController');
+    // Route Jawaban Komen
+    Route::resource('jawaban-komen', 'JawabanKomenController');
 });
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
@@ -50,3 +47,4 @@ Route::get('/pertanyaanDown/{id}', 'AjaxController@pertanyaanDown');
 Route::get('/jawabanUp/{id}/{id2}', 'AjaxController@jawabanUp');
 Route::get('/jawabanDown/{id}/{id2}', 'AjaxController@jawabanDown');
 //VOTE==================== END
+Route::get('/about', 'HomeController@about');
