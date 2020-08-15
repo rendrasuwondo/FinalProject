@@ -73,7 +73,6 @@ class PertanyaanController extends Controller
         // $jawaban = Jawaban::latest()->paginate(10);
         $user = Pertanyaan::find($pertanyaan->id);
         $jawaban = jawaban::where('pertanyaan_id', $pertanyaan->id)->get();
-<<<<<<< HEAD
 
         $vote = DB::table('pertanyaan_like')
             ->where('pertanyaan_id', $pertanyaan->id)
@@ -82,10 +81,8 @@ class PertanyaanController extends Controller
         // dd($vote);
 
         return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'vote'));
-=======
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
         return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen'));
->>>>>>> 1b338c4ee74ea28e16164ae312369cbed4ae4718
     }
 
     /**
