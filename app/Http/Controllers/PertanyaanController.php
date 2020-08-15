@@ -97,10 +97,6 @@ class PertanyaanController extends Controller
 
         // dd($vote);
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
-<<<<<<< HEAD
-=======
-
->>>>>>> 166724e7338799aafd8f1dddcdffa5f66d0cee41
         return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote'));
     }
 

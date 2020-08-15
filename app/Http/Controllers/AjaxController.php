@@ -10,8 +10,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Jawaban;
 use App\Jawaban_like;
 
+
 class AjaxController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        // $this->middleware('auth')->except(['index', 'show']);
+        // $this->middleware('auth')->only(['create']);
+    }
+
     public function index($id)
     {
 

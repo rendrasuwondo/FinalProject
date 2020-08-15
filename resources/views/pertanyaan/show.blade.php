@@ -123,11 +123,8 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
-<<<<<<< HEAD
+
                     Oleh : {{$item->name}}
-                    Tanggal : {{$item->created_at}}  </li>
-=======
-                    Oleh : {{$item->user->name}}
                     Tanggal : {{$item->created_at}}
                   </li>
                   <li class="list-group-item">
@@ -180,7 +177,6 @@
                       </form>
                     </div>
                   </li>  
->>>>>>> 166724e7338799aafd8f1dddcdffa5f66d0cee41
                 </ul>
               </div>
               
