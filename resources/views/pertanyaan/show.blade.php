@@ -17,7 +17,7 @@
         <div class="col-md-12">
           <nav class="navbar navbar-light bg-light" >
             <a class="navbar-brand" href="#">
-              {{Auth::user()->email }}
+             
               Reputasi : {{$reputasi}}
             </a>
           </nav>
