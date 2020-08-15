@@ -53,9 +53,9 @@
                 <div class="card-header">
                   <div class="row">            
                     <div class="col-md-1" style="font-size: 20px; color:#606060; text-align: center;">
-                      
-                        <i class="fas fa-chevron-up"></i>
-                        <span class="col-md-12">0</span>
+                       <a onclick="return getUp()" href=""><i class="fas fa-chevron-up"></i></a>
+                        
+                    <span class="col-md-12">{{$vote}}</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="col"><h4>{!! $item->isi !!}</h4> 
@@ -90,7 +90,9 @@
             </div>
           </div>
           
-           
+          <div id = 'msg'>This message will be replaced using Ajax. 
+            Click the button to replace the message.</div>
+         <button onclick="getMessage()">fgdsg</button>
 
         </div>
       </div>
@@ -139,5 +141,22 @@
     };
   
     tinymce.init(editor_config);
+
+
+    function getUp() {
+            $.ajax({
+               type:'GET',
+               url:'/getmsg/{{$pertanyaan->id}}',
+              //  data:'_token = <?php echo csrf_token() ?>',
+               success:function(data) {
+                  $("#msg").html(data.msg);
+               }
+            });
+           
+           return false;
+
+         }
+
+   
   </script>    
 @endpush
