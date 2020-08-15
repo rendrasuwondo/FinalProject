@@ -11,4 +11,9 @@ class Pertanyaan extends Model
     protected $fillable = [
         'user_id', 'jawaban_id', 'judul', 'isi'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\user');
+    }
 }

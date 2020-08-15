@@ -28,28 +28,52 @@
               <h3 class="card-title"> {{ $pertanyaan->judul }} </h3>
             </div>
             <div class="card-body">
-              <div class="text-right">
-                Dibuat Oleh : <a href="">{{ $pertanyaan->user_id }}</a>
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <p>
+                      {!! $pertanyaan->isi !!}
+                    </p>
+                  </div>
+                  <div class="col-3 text-right">
+                    Dibuat Oleh : <a href="">{{ $user->user->name }}</a>
                 <br>
                 Dibuat Pada : <a href="">{{ $pertanyaan->created_at }}</a>
+                  </div>               
+                </div>           
+              </div>              
+              <hr>
+
+              <h3>Jawaban</h3>
+
+              
+              @foreach ($jawaban as $item)
+              <div class="card" >
+                <div class="card-header">
+                 <h4>{!! $item->isi !!}</h4> 
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    Oleh : {{$item->user->name}}
+                    Tanggal : {{$item->created_at}}  </li>
+                </ul>
               </div>
-              <div class="">
-                <p>
-                  {!! $pertanyaan->isi !!}
-                </p>
-              </div>
+              
+              <br>
+              @endforeach
+
      `        <hr>
-     <form action="{{ route('jawaban.store') }}" method="POST">
-      @csrf
-     <div class="form-group">
-     <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
-      <label for="isi"><h3>Jawaban Anda</h3></label>
-      <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
-      
-      <input type="submit" value="Post" class="btn btn-success mt-2">
-     </form>
+              <form action="{{ route('jawaban.store') }}" method="POST">
+                @csrf
+              <div class="form-group">
+              <input type="hidden" name="pertanyaan_id" id="pertanyaan_id" value="{{$pertanyaan->id}}">
+                <label for="isi"><h3>Jawaban Anda</h3></label>
+                <textarea name="isi" class="form-control my-editor">{!! old('isi', $content ?? '') !!}</textarea>
+                
+                <input type="submit" value="Post" class="btn btn-success mt-2">
+              </form>
      
-    </div>
+            </div>
 
              
 

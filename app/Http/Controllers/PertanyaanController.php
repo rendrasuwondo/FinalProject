@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pertanyaan;
+use App\Jawaban;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +60,10 @@ class PertanyaanController extends Controller
      */
     public function show(Pertanyaan $pertanyaan)
     {
-        return view('pertanyaan.show', compact('pertanyaan'));
+        // $jawaban = Jawaban::latest()->paginate(10);
+        $user = Pertanyaan::find($pertanyaan->id);
+        $jawaban = jawaban::where('pertanyaan_id', $pertanyaan->id)->get();
+        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user'));
     }
 
     /**
