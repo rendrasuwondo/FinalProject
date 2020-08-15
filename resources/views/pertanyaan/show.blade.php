@@ -113,10 +113,9 @@
                 <div class="card-header">
                   <div class="row">            
                     <div class="col-md-1" style="font-size: 20px; color:#606060; text-align: center;">
-                       <a onclick="return getUp()" href=""><i class="fas fa-chevron-up"></i></a>
-                        
-                    <span class="col-md-12">{{$vote}}</span>
-                        <i class="fas fa-chevron-down"></i>
+                       <a  href="/jawabanUp/{{$item->id}}/{{$pertanyaan->id}}"><i class="fas fa-chevron-up"></i></a>
+                    <span id="jawabanvote{{$item->id}}"  class="col-md-12">{{$item->point}}</span>
+                    <a  href="/jawabanDown/{{$item->id}}/{{$pertanyaan->id}}"><i class="fas fa-chevron-down"></i></a>
                     </div>
                     <div class="col"><h4>{!! $item->isi !!}</h4> 
                     </div>
@@ -124,7 +123,7 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">
-                    Oleh : {{$item->user->name}}
+                    Oleh : {{$item->name}}
                     Tanggal : {{$item->created_at}}  </li>
                 </ul>
               </div>
@@ -224,6 +223,35 @@
               //  data:'_token = <?php echo csrf_token() ?>',
                success:function(data) {
                   $("#pertanyaanvote").html(data.msg);
+               }
+            });
+           
+           return false;
+
+         }
+
+         function getUpJawaban(id) {
+            $.ajax({
+               type:'GET',
+               url:'/jawabanUp/' + id,
+              //  data:'_token = <?php echo csrf_token() ?>',
+               success:function(data) {
+                  $("#jawabanvote" + id).html(data.msg);
+               }
+            });
+           
+           return false;
+
+         }
+
+         function getDownJawaban(id) {
+           
+            $.ajax({
+               type:'GET',
+               url:'/jawabanDown/' + id,
+              //  data:'_token = <?php echo csrf_token() ?>',
+               success:function(data) {
+                  $("#jawabanvote" + id).html(data.msg);
                }
             });
            

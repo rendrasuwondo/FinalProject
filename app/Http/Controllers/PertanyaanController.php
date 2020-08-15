@@ -72,23 +72,31 @@ class PertanyaanController extends Controller
     {
         // $jawaban = Jawaban::latest()->paginate(10);
         $user = Pertanyaan::find($pertanyaan->id);
-        $jawaban = jawaban::where('pertanyaan_id', $pertanyaan->id)->get();
+
+        // $jawaban = jawaban::where('pertanyaan_id', $pertanyaan->id)->get();
+
+        // $jawaban = DB::table('jawaban')
+        //     ->join('users', 'jawaban.user_id', '=', 'users.id')
+        //     ->leftjoin('v_jawaban_vote', 'jawaban.id', '=', 'v_jawaban_vote.jawaban_id')
+        //     ->where('pertanyaan_id', $pertanyaan->id)
+        //     ->get();
+
+        $jawaban = DB::table('jawaban')
+            ->join('users', 'jawaban.user_id', '=', 'users.id')
+            ->leftjoin('v_jawaban_vote', 'jawaban.id', '=', 'v_jawaban_vote.jawaban_id')
+            ->select('jawaban.*', 'users.name', DB::raw('ifnull(point,0) as point'))
+            ->where('pertanyaan_id', $pertanyaan->id)
+            ->get();
+
+        // dd($jawaban_vote);
 
         $vote = DB::table('pertanyaan_like')
             ->where('pertanyaan_id', $pertanyaan->id)
             ->sum('point');
 
         // dd($vote);
-<<<<<<< HEAD
-
-        $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
-
-
-        return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'vote', 'pertanyaanKomen'));
-=======
         $pertanyaanKomen = PertanyaanKomen::where('pertanyaan_id', $pertanyaan->id)->get();
         return view('pertanyaan.show', compact('pertanyaan', 'jawaban', 'user', 'pertanyaanKomen', 'vote'));
->>>>>>> 20f4c6a1209ae878f9483fc7d82f036fa53b9550
     }
 
     /**

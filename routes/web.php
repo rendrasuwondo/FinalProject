@@ -47,4 +47,6 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 Route::get('/getmsg/{id}', 'AjaxController@index');
 Route::get('/pertanyaanUp/{id}', 'AjaxController@pertanyaanUp');
 Route::get('/pertanyaanDown/{id}', 'AjaxController@pertanyaanDown');
+Route::get('/jawabanUp/{id}/{id2}', 'AjaxController@jawabanUp');
+Route::get('/jawabanDown/{id}/{id2}', 'AjaxController@jawabanDown');
 //VOTE==================== END

@@ -7,6 +7,8 @@ use DB;
 use App\Pertanyaan_like;
 use App\Pertanyaan;
 use Illuminate\Support\Facades\Auth;
+use App\Jawaban;
+use App\Jawaban_like;
 
 class AjaxController extends Controller
 {
@@ -54,6 +56,7 @@ class AjaxController extends Controller
         // echo json_encode($msg);
         return response()->json(array('msg' => $msg), 200);
     }
+
     public function pertanyaanDown($id)
     {
 
@@ -73,5 +76,65 @@ class AjaxController extends Controller
 
         // echo json_encode($msg);
         return response()->json(array('msg' => $msg), 200);
+    }
+
+
+    public function jawabanUp(Request $request)
+    {
+
+        $jawaban = Jawaban::where('id', $request->segment(2))->first();
+
+        if ($jawaban['user_id'] != Auth::id()) {
+
+            $count = DB::table('jawaban_like')
+                ->where('jawaban_id', $request->segment(2))
+                ->where('user_id', Auth::id())
+                ->count('id');
+
+            if ($count == 0) {
+                //INSERT VOTE
+                $jawabanlike['user_id'] = Auth::id();
+                $jawabanlike['jawaban_id'] = $request->segment(2);
+                $jawabanlike['point'] = 10;
+
+                Jawaban_like::create($jawabanlike);
+                //INSERT VOTE END
+            }
+        }
+
+
+
+        //SUM VOTE
+        $msg = DB::table('jawaban_like')
+            ->where('jawaban_id', $request->segment(2))
+            ->sum('point');
+        //SUM VOTE END
+
+        // echo json_encode($msg);
+        return redirect()->route('pertanyaan.show', $request->segment(3));
+    }
+
+    public function jawabanDown(Request $request)
+    {
+
+        // dd($request->segment(3));
+
+        //INSERT VOTE
+        $jawaban['user_id'] = Auth::id();
+        $jawaban['jawaban_id'] = $request->segment(2);
+        $jawaban['point'] = -1;
+
+        Jawaban_like::create($jawaban);
+        // //INSERT VOTE END
+
+        //SUM VOTE
+        $msg = DB::table('jawaban_like')
+            ->where('jawaban_id', $request->segment(2))
+            ->sum('point');
+        //SUM VOTE END
+
+        // // echo json_encode($msg);
+        // // return response()->json(array('msg' => $msg), 200);
+        return redirect()->route('pertanyaan.show', $request->segment(3));
     }
 }
